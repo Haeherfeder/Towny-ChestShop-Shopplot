@@ -48,8 +48,8 @@ public class OnPlace implements Listener{
     @EventHandler
     public void onShopCreate(PreShopCreationEvent event) {
     	if(!allowShopCreate(event)) {
-    	String[] test = {"Test","Test","Test","Test"};
-    	event.setSignLines(test);
+    	String[] message = {"ChestShop arent","allowed","outside","Shop Plots"};
+    	event.setSignLines(message);
     	event.setOutcome(PreShopCreationEvent.CreationOutcome.OTHER);
     	}
     }
