@@ -1,6 +1,7 @@
 package de.haeherfeder.plug.EventListener;
 
 import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,6 +16,7 @@ public class OnPlace implements Listener{
 		Player p = event.getPlayer();
 		p.sendMessage("Event erkannt");
 		Sign s = event.getSign();
+		Block b = s.getBlock();
 		Location l = s.getLocation();
 		if(p.hasPermission("Chestshop.CreateOutsideShops")) {
 			p.sendMessage("Have Perm");
@@ -23,7 +25,7 @@ public class OnPlace implements Listener{
 		p.sendMessage("have no perm.");
 //		p.sendMessage("no perm");
 //		Towny t = new Towny();
-		if (TownyUniverse.isWilderness(p.getLocation().getBlock())) {
+		if (TownyUniverse.isWilderness(b)) {
 			p.sendMessage("Wilderness");
 			return false;
 		} 
