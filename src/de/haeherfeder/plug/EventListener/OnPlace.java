@@ -38,7 +38,7 @@ public class OnPlace implements Listener{
 			return false;
 		}
 		System.out.println(we);
-		if(we.equals(TownBlockType.COMMERCIAL)) {
+		if(we.equals(TownBlockType.COMMERCIAL)||we.equals(TownBlockType.BANK)||we.equals(TownBlockType.EMBASSY)) {
 			p.sendMessage("Plot Allowed.");
 			return true;
 		}

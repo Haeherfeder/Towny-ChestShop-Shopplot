@@ -1,4 +1,4 @@
-main: de.plug.Main.Main
+main: de.haeherfeder.plug.Main.Main
 name: Chest_Towny
 version: 0.0.1
 description: This plugin does so much stuff it can't be contained!

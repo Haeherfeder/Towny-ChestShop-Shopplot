@@ -1,3 +1,4 @@
+
 package de.haeherfeder.plug.Main;
 
 import org.bukkit.plugin.java.JavaPlugin;
