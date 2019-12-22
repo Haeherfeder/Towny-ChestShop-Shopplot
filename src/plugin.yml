@@ -1,9 +1,9 @@
 main: de.haeherfeder.plug.Main.Main
 name: Chest_Towny
-version: 0.0.1
-description: This plugin does so much stuff it can't be contained!
+version: 0.1.0
+description: This plugin try to prevent placeing Chestshops outside Towns. 
 website: haeherfeder.de
 permissions:
     Chestshop.CreateOutsideShops:
-        description: Test
+        description: allow to place chestshops outside towns.
 depend: [ChestShop, Towny]
