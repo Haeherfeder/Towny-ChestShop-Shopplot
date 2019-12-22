@@ -10,36 +10,39 @@ import com.Acrobot.ChestShop.Events.PreShopCreationEvent;
 import com.palmergames.bukkit.towny.object.TownBlockType;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 
+import de.haeherfeder.Config.Debug;
+
 public class OnPlace implements Listener{
     public boolean allowShopCreate(PreShopCreationEvent event)
     {
 		Player p = event.getPlayer();
-		p.sendMessage("Event erkannt");
+		Debug.sendMessage("Event erkannt");
 		Sign s = event.getSign();
 		Block b = s.getBlock();
 		Location l = s.getLocation();
 		if(p.hasPermission("Chestshop.CreateOutsideShops")) {
-			p.sendMessage("Have Perm");
+			Debug.sendMessage("Have Perm");
 			return true;
 		}
 		p.sendMessage("have no perm.");
 //		p.sendMessage("no perm");
 //		Towny t = new Towny();
 		if (TownyUniverse.isWilderness(b)) {
-			p.sendMessage("Wilderness");
+			Debug.sendMessage("Wilderness");
+			p.sendMessage("you aren't allowed to create a shop in the Wilderness");
 			return false;
 		} 
 		TownBlockType we;
 		try {
 			we = TownyUniverse.getTownBlock(l).getType();
 		} catch (Exception e) {
-			p.sendMessage("Exeption");
+			Debug.sendMessage("Exeption");
 			e.printStackTrace();
 			return false;
 		}
-		System.out.println(we);
+		Debug.sendDebugMsg(we);
 		if(we.equals(TownBlockType.COMMERCIAL)||we.equals(TownBlockType.EMBASSY)) {
-			p.sendMessage("Plot Allowed.");
+			Debug.sendMessage("Plot Allowed.");
 			return true;
 		}
 		p.sendMessage("Du kannst auf diesem Plot kein Shop errichten.");

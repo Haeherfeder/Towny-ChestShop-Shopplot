@@ -7,6 +7,10 @@ import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.bukkit.Bukkit;
+
+import de.haeherfeder.plug.Main.Main;
+
 public class Debug {
 	private static FileOutputStream fileOut = null; 
 	public static boolean getDebug() {
@@ -26,7 +30,7 @@ public class Debug {
 		}
 		if(getType().equals(DebugType.file)) {
 			if(fileOut==null) {
-				fileOut = new FileOutputStream(Config.getProperty("debugDir")+LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_kk:mm"))+".debug");
+				fileOut = new FileOutputStream(Main.getPlugin().getDataFolder()+"/"+Config.getProperty("debugDir")+LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_kk:mm"))+".debug");
 			}
 			return fileOut;
 		}
@@ -41,12 +45,19 @@ public class Debug {
 	public static void sendDebugMsg(String s) {
 		if(getDebug()) {
 			try {
-				getDebugStream().write((s+System.lineSeparator()).getBytes());
-				getDebugStream().flush();
+				if(null==getDebugStream()) {
+					Bukkit.broadcastMessage(s);
+				}
+				try {
+					getDebugStream().write((s+System.lineSeparator()).getBytes());
+					getDebugStream().flush();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+				Bukkit.broadcastMessage(s);
 			}
 		}
 	}
@@ -57,5 +68,8 @@ public class Debug {
 		for(Object obj : obA) {
 			sendDebugMsg(obj.toString());
 		}
+	}
+	public static void sendMessage(String mes) {
+		sendDebugMsg(mes);
 	}
 }
